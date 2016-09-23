@@ -1,0 +1,27 @@
+{
+  "name": "wikistack",
+  "version": "1.0.0",
+  "description": "a wikistack",
+  "scripts": {"start": "nodemon app.js"},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agionfriddo/wikistack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agionfriddo/wikistack/issues"
+  },
+  "homepage": "https://github.com/agionfriddo/wikistack#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "nunjucks": "^2.5.2",
+    "sequelize": "^3.24.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
