@@ -2,11 +2,12 @@ var morgan = require('morgan');
 var express = require('express');
 var nunjucks = require('nunjucks');
 var app = express();
-var routes = require('./routes/');
+var wikiRouter = require('./routes/wiki');
 var bodyParser = require('body-parser');
 var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
 var fs = require('fs');
 var models = require('./models')
+
 
 app.use(morgan('dev'));
 
@@ -19,6 +20,8 @@ nunjucks.configure('views', {noCache: true})
 app.set('view engine', 'html')
 app.engine('html', nunjucks.render)
 
+
+app.use('/wiki', wikiRouter);
 
 app.get('/', function(req, res) {
   res.render('index');

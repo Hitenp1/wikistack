@@ -53,6 +53,20 @@ var Page = db.define('page', {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     }
+}, {
+  hooks: {
+    beforeValidate: function(page, options) {
+      function generateUrlTitle (title) {
+                    if (title) {
+                    return title.replace(/\s+/g, '_').replace(/\W/g, '');
+                        } else {
+                        // Generates random 5 letter string
+                     return Math.random().toString(36).substring(2, 7);
+                          }
+                      };
+      page.urlTitle = generateUrlTitle (page.title);
+                    }
+                  }
 });
 
 var User = db.define('user', {
