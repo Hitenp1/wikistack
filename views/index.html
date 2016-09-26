@@ -5,5 +5,11 @@
   <hr>
   <ul class="list-unstyled">
     <!-- PLACEHOLDER LIST OF PAGES -->
+    <ul>
+  {% for page in pages %}
+    <li><a href="{{ page.urlTitle }}">{{page.title}}</a></li>
+  {% endfor %}
+</ul>
+
   </ul>
 {% endblock %}

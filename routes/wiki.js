@@ -1,12 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models');
-var Page = models.Page; 
-var User = models.User; 
+var Page = models.Page;
+var User = models.User;
 
 router.get('/', function(req, res, next) {
-	res.redirect('/');
-})
+  return Page.findAll()
+  .then(function(pages) {
+    console.log(pages);
+    res.render('index.html', {pages: pages})
+  })
+  .catch(next)
+  })
 
 
 router.post('/', function(req, res, next) {
@@ -16,7 +21,7 @@ router.post('/', function(req, res, next) {
     content: req.body.content
   });
 
-  page.save().then(function() {res.redirect('/')}).catch(next);
+  page.save().then(function(savedPage) {res.redirect(savedPage.route);}).catch(next);
 
 });
 
@@ -26,10 +31,17 @@ router.get('/add', function(req, res, next) {
 })
 
 
-
-
-
-
+router.get('/:urlTitle', function(req, res, next) {
+  return Page.findOne({
+    where: {
+      urlTitle: req.params.urlTitle
+    }
+  })
+  .then(function(foundPage) {
+  res.render('wikipage.html', {foundPage: foundPage});
+})
+  .catch(next);
+})
 
 
 module.exports = router;
