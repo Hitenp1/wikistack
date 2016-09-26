@@ -6,6 +6,7 @@ var routes = require('./routes/');
 var bodyParser = require('body-parser');
 var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
 var fs = require('fs');
+var models = require('./models')
 
 app.use(morgan('dev'));
 
@@ -22,5 +23,14 @@ app.engine('html', nunjucks.render)
 app.get('/', function(req, res) {
   res.render('index');
 })
-app.listen(3000);
-console.log('sever listening');
+
+models.User.sync({})
+.then(function() {
+  return models.Page.sync({})
+})
+.then(function() {
+  app.listen(3001, function() {
+    console.log('server is listening on port 3001!')
+  });
+})
+.catch(console.error);
